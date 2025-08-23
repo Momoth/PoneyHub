@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
-using PoneyHub.Data;
+using PoneyHub.Application;
+using PoneyHub.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,20 +12,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<PoneyHubDbContext>(options =>
+builder.Services.AddDbContext<IPoneyHubDbContext, PoneyHubDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PoneyHubDbContext"));
 });
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+using(var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<PoneyHubDbContext>();
+    var context = scope.ServiceProvider.GetRequiredService<IPoneyHubDbContext>();
 
-    if (!dbContext.Database.CanConnect())
+    if (!context.Database.CanConnect())
     {
-        throw new NotImplementedException("Cant connect to db");
+        throw new NotImplementedException();
     }
 }
 

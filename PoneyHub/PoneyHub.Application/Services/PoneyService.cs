@@ -57,7 +57,7 @@ namespace PoneyHub.Application.Services
 
         public async Task<GetPoney> GetAsync(int id)
         {
-            var poney = await poneyHubDbContext.Poneys.Include(p => p.Categorie).SingleOrDefaultAsync(x => x.Id == id);
+            var poney = await poneyHubDbContext.Poneys.Include(p => p.Categorie).Include(p => p.Prestations).SingleOrDefaultAsync(x => x.Id == id);
 
             if (poney == null)
             {
@@ -71,7 +71,14 @@ namespace PoneyHub.Application.Services
                 Description = poney.Description,
                 Nom = poney.Nom,
                 Photo = poney.Photo,
-                Categorie = poney.Categorie?.Libelle
+                Categorie = poney.Categorie?.Libelle,
+                Prestations = poney.Prestations.Select(p => new GetPrestation
+                {
+                    Id = p.Id,
+                    DateHeureDebut = p.DateHeureDebut,
+                    DateHeureFin = p.DateHeureFin,
+                    MontantFacture = p.MontantFacture
+                }).ToList()
             };
         }
 

@@ -9,5 +9,6 @@
         public double Coefficient { get; set; }
         public Categorie? Categorie { get; set; }
         public int? CategorieId { get; set; }
+        public List<Prestation>? Prestations { get; set; }
     }
 }

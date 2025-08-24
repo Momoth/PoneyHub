@@ -8,5 +8,6 @@
         public string Photo { get; set; }
         public double Coefficient { get; set; }
         public string? Categorie { get; set; }
+        public List<GetPrestation> Prestations { get; set; }
     }
 }

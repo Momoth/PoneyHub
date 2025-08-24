@@ -12,8 +12,8 @@ namespace PoneyHub.Application.Services
 
         Task<GetPoney> GetAsync(int id);
 
-        Task<List<GetPoney>> GetAllAsync();
+        Task<List<GetPoney>> GetAllAsync(string? order);
 
-        Task<PaginatedResults<GetPoney>> GetAllAsync(int skip, int take);
+        Task<PaginatedResults<GetPoney>> GetAllAsync(int skip, int take, string? order);
     }
 }

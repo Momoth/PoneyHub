@@ -54,14 +54,14 @@ namespace PoneyHub.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync(int? skip, int? take)
+        public async Task<IActionResult> GetAllAsync(int? skip, int? take, string? order)
         {
             if (skip.HasValue && take.HasValue)
             {
-                return Ok(await poneyService.GetAllAsync(skip.Value, take.Value));
+                return Ok(await poneyService.GetAllAsync(skip.Value, take.Value, order));
             }
 
-            return Ok(await poneyService.GetAllAsync());
+            return Ok(await poneyService.GetAllAsync(order));
         }
     }
 }

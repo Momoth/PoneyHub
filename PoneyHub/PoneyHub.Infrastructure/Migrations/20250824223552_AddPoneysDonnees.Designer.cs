@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PoneyHub.Infrastructure;
 
@@ -11,9 +12,11 @@ using PoneyHub.Infrastructure;
 namespace PoneyHub.Infrastructure.Migrations
 {
     [DbContext(typeof(PoneyHubDbContext))]
-    partial class PoneyHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250824223552_AddPoneysDonnees")]
+    partial class AddPoneysDonnees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,128 +184,6 @@ namespace PoneyHub.Infrastructure.Migrations
                     b.HasIndex("PoneyId");
 
                     b.ToTable("Prestation", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateHeureDebut = new DateTime(2025, 8, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 500m,
-                            PoneyId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateHeureDebut = new DateTime(2025, 8, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 700m,
-                            PoneyId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateHeureDebut = new DateTime(2025, 8, 27, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 600m,
-                            PoneyId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateHeureDebut = new DateTime(2025, 8, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 500m,
-                            PoneyId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DateHeureDebut = new DateTime(2025, 8, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 700m,
-                            PoneyId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DateHeureDebut = new DateTime(2025, 8, 27, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 700m,
-                            PoneyId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DateHeureDebut = new DateTime(2025, 8, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 400m,
-                            PoneyId = 3
-                        },
-                        new
-                        {
-                            Id = 8,
-                            DateHeureDebut = new DateTime(2025, 8, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 800m,
-                            PoneyId = 4
-                        },
-                        new
-                        {
-                            Id = 9,
-                            DateHeureDebut = new DateTime(2025, 8, 27, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 500m,
-                            PoneyId = 4
-                        },
-                        new
-                        {
-                            Id = 10,
-                            DateHeureDebut = new DateTime(2025, 8, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 500m,
-                            PoneyId = 5
-                        },
-                        new
-                        {
-                            Id = 11,
-                            DateHeureDebut = new DateTime(2025, 8, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 700m,
-                            PoneyId = 6
-                        },
-                        new
-                        {
-                            Id = 12,
-                            DateHeureDebut = new DateTime(2025, 8, 27, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 700m,
-                            PoneyId = 6
-                        },
-                        new
-                        {
-                            Id = 13,
-                            DateHeureDebut = new DateTime(2025, 8, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 400m,
-                            PoneyId = 6
-                        },
-                        new
-                        {
-                            Id = 14,
-                            DateHeureDebut = new DateTime(2025, 8, 26, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 800m,
-                            PoneyId = 7
-                        },
-                        new
-                        {
-                            Id = 15,
-                            DateHeureDebut = new DateTime(2025, 8, 27, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateHeureFin = new DateTime(2025, 8, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            MontantFacture = 500m,
-                            PoneyId = 7
-                        });
                 });
 
             modelBuilder.Entity("PoneyHub.Domain.Entities.Poney", b =>

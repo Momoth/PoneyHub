@@ -4,6 +4,8 @@ using PoneyHub.Application.Context;
 using PoneyHub.Application.Models;
 using PoneyHub.Domain.Entities;
 
+using System.Xml.Serialization;
+
 namespace PoneyHub.Application.Services
 {
     public class PoneyService : IPoneyService
@@ -24,9 +26,9 @@ namespace PoneyHub.Application.Services
             await poneyHubDbContext.SaveChangesAsync();
         }
 
-        public async Task<List<GetPoney>> GetAllAsync()
+        public async Task<List<GetPoney>> GetAllAsync(string? order)
         {
-            return await poneyHubDbContext.Poneys.Include(p => p.Categorie).Select(p => new GetPoney
+            var poneys = poneyHubDbContext.Poneys.Include(p => p.Categorie).Select(p => new GetPoney
             {
                 Id = p.Id,
                 Coefficient = p.Coefficient,
@@ -34,25 +36,79 @@ namespace PoneyHub.Application.Services
                 Nom = p.Nom,
                 Photo = p.Photo,
                 Categorie = p.Categorie != null ? p.Categorie.Libelle : null,
-            }).ToListAsync();
+            });
+
+            if (!string.IsNullOrEmpty(order))
+            {
+                switch (CodeIdentifier.MakePascal(order))
+                {
+                    case "Id":
+                        poneys = poneys.OrderBy(p => p.Id);
+                        break;
+
+                    case "Nom":
+                        poneys = poneys.OrderBy(p => p.Nom);
+                        break;
+
+                    case "Description":
+                        poneys = poneys.OrderBy(p => p.Description);
+                        break;
+
+                    case "Coefficient":
+                        poneys = poneys.OrderBy(p => p.Coefficient);
+                        break;
+
+                    case "Categorie":
+                        poneys = poneys.OrderBy(p => p.Categorie);
+                        break;
+                }
+            }
+
+            return await poneys.ToListAsync();
         }
 
-        public async Task<PaginatedResults<GetPoney>> GetAllAsync(int skip, int take)
+        public async Task<PaginatedResults<GetPoney>> GetAllAsync(int skip, int take, string? order)
         {
-            var query = poneyHubDbContext.Poneys;
+            var poneys = poneyHubDbContext.Poneys.Include(p => p.Categorie).Select(p => new GetPoney
+            {
+                Id = p.Id,
+                Coefficient = p.Coefficient,
+                Description = p.Description,
+                Nom = p.Nom,
+                Photo = p.Photo,
+                Categorie = p.Categorie != null ? p.Categorie.Libelle : string.Empty,
+            });
+
+            if (!string.IsNullOrEmpty(order))
+            {
+                switch (CodeIdentifier.MakePascal(order))
+                {
+                    case "Id":
+                        poneys = poneys.OrderBy(p => p.Id);
+                        break;
+
+                    case "Nom":
+                        poneys = poneys.OrderBy(p => p.Nom);
+                        break;
+
+                    case "Description":
+                        poneys = poneys.OrderBy(p => p.Description);
+                        break;
+
+                    case "Coefficient":
+                        poneys = poneys.OrderBy(p => p.Coefficient);
+                        break;
+
+                    case "Categorie":
+                        poneys = poneys.OrderBy(p => p.Categorie);
+                        break;
+                }
+            }
 
             return new PaginatedResults<GetPoney>(
-                await query.Include(p => p.Categorie).Select(p => new GetPoney
-                {
-                    Id = p.Id,
-                    Coefficient = p.Coefficient,
-                    Description = p.Description,
-                    Nom = p.Nom,
-                    Photo = p.Photo,
-                    Categorie = p.Categorie != null ? p.Categorie.Libelle : string.Empty,
-                }).Skip(skip).Take(take).ToListAsync(),
+                await poneys.Skip(skip).Take(take).ToListAsync(),
                 take,
-                await query.CountAsync());
+                await poneys.CountAsync());
         }
 
         public async Task<GetPoney> GetAsync(int id)

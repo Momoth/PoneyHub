@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
-using PoneyHub.Application;
+using PoneyHub.Application.Context;
+using PoneyHub.Application.Services;
 using PoneyHub.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IPoneyService, PoneyService>();
+
 builder.Services.AddDbContext<IPoneyHubDbContext, PoneyHubDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("PoneyHubDbContext"));
@@ -19,7 +22,7 @@ builder.Services.AddDbContext<IPoneyHubDbContext, PoneyHubDbContext>(options =>
 
 var app = builder.Build();
 
-using(var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<IPoneyHubDbContext>();
 

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 using PoneyHub.Domain.Entities;
 
-namespace PoneyHub.Application
+namespace PoneyHub.Application.Context
 {
     public interface IPoneyHubDbContext
     {
@@ -11,5 +12,7 @@ namespace PoneyHub.Application
         DatabaseFacade Database { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+        EntityEntry Remove(object entity);
     }
 }

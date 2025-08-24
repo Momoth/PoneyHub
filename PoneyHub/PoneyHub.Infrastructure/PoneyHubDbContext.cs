@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using PoneyHub.Application;
+using PoneyHub.Application.Context;
 using PoneyHub.Domain.Entities;
 
 using System.Reflection;

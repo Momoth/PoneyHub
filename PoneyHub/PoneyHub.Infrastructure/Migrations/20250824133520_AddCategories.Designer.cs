@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PoneyHub.Infrastructure;
 
@@ -10,9 +11,11 @@ using PoneyHub.Infrastructure;
 namespace PoneyHub.Infrastructure.Migrations
 {
     [DbContext(typeof(PoneyHubDbContext))]
-    partial class PoneyHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250824133520_AddCategories")]
+    partial class AddCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
